@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>绘图板</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<h1 id="toc_0">绘图板</h1>
+
+<blockquote>
+<p>By Johann</p>
+</blockquote>
+
+<h2 id="toc_1">FuncCalc库</h2>
+
+<h3 id="toc_2">作用与实现方法</h3>
+
+<ul>
+<li>函数单点求值</li>
+<li>FuncCalc.c, FuncCalc.h</li>
+<li>将函数表达式中的x全部代换为数值后作表达式求值</li>
+<li>MASTERPIECE（划掉）</li>
+</ul>
+
+<h3 id="toc_3">库变量</h3>
+
+<div><pre><code class="language-cpp">#ifndef INITED
+#define INITED
+ 
+typedef enum
+{
+    Opd = 0,
+    Opt = 1
+}Type;
+
+typedef struct
+{
+    int opt;
+    double opd;
+    Type tp;
+}Node;
+
+extern char* s;
+extern char* str;
+
+extern int bb;
+extern char brackets[NUM_OPS];
+extern int valid;
+
+#endif</code></pre></div>
+
+<ul>
+<li><strong>Node</strong> 操作符栈和操作数栈的节点</li>
+<li><strong>str</strong> 读入的字符串</li>
+<li><strong>s</strong> 去除空格和非可见字符后的表达式</li>
+<li><strong>bb</strong> 用于括号匹配。匹配时\(bb\)恒非负且完成计算时\(bb=0\)</li>
+<li><strong>brackets</strong> 存储括号的位置</li>
+<li><strong>valid</strong> 表达式是否合法</li>
+</ul>
+
+<h3 id="toc_4">库函数</h3>
+
+<div><pre><code class="language-cpp">int input(Node *in, char* x);
+int translate(char *p, Node *re, int *len);
+double translateopd(char *p, int *len);
+int translateopt(char *p, int *len);
+int cmp(const char *s, const char *d);
+int calculate(Node *n, double *r);
+int sclt(int opr, double *opd);
+int dclt(int opr, double *opd1, double opd2);
+int prid(int c);
+void inputFunction();
+double getValue(char* x);</code></pre></div>
+
+<p><strong>供调用的函数</strong></p>
+
+<ul>
+<li><strong>inputFunction</strong> 输入函数表达式</li>
+<li><strong>getValue(char* x)</strong> 函数单点求值，x以字符指针类型的参数传入</li>
+</ul>
+
+<h3 id="toc_5">支持的表达式数学函数</h3>
+
+<ol>
+<li><strong>三角函数</strong> sin, cos, tan</li>
+<li><strong>反三角函数</strong> asin, acos, atan</li>
+<li><strong>幂函数</strong> a^b</li>
+<li><strong>对数函数</strong> ln, lg</li>
+<li><strong>括号</strong> (, )</li>
+</ol>
+
+<h2 id="toc_6">绘图板</h2>
+
+<h3 id="toc_7">作用与实现方法</h3>
+
+<ul>
+<li>输入函数，屏幕打印图像</li>
+<li>main.c</li>
+<li>执行过程
+
+<ol>
+<li>统计散点分布</li>
+<li>根据数据调整横纵坐标比例</li>
+<li>重新取点并输出图像</li>
+</ol></li>
+</ul>
+
+<h3 id="toc_8">实现效果</h3>
+
+<p><img src="https://box.zjuqsc.com/-53858026" alt="">
+\(y=\frac{sinx}{x}\)</p>
+
+<h3 id="toc_9">初始化</h3>
+
+<div><pre><code class="language-cpp">void init()
+{
+    int i;
+    line(leftMostx, Oy, rightMostx, Oy); // x-axis
+    line(Ox, upMosty, Ox, downMosty); // y-axis
+    for(i = leftMostx; i &lt;= rightMostx; i += 60)
+    {
+        if (i == rightMostx) // x-arrow
+        {
+            line(695, 295, rightMostx, Oy);
+            line(695, 305, rightMostx, Oy);
+        }
+        else line(i, 305, i, 295); // x lime-stone
+    }
+    for(i = upMosty; i &lt;= downMosty; i += 58)
+    {
+        if (i == upMosty) // y-arrow
+        {
+            line(395, 15, Ox, upMosty);
+            line(405, 15, Ox, upMosty);
+        }
+        else line(395, i, 405, i); // y lime-stone
+    }
+}</code></pre></div>
+
+<p>绘制了横纵坐标、正坐标轴的箭头和坐标轴的标尺。</p>
+
+<h3 id="toc_10">统计散点</h3>
+
+<div><pre><code class="language-cpp">void getData(double l, double r)
+{
+    double delta = (r - l) / 600.0; // select 600 points on the plane
+    double i;
+    tot = 0;
+    for(i = l; i &lt;= r; i += delta)
+    {
+        sprintf(tmp, &quot;%lf&quot;, i); // x = i
+        x[0] = &#39;(&#39;; x[1] = &#39;\0&#39;;
+        strcat(x, tmp);
+        strcat(x, &quot;)&quot;);
+        
+        double ANS = getValue(x);
+        if (ANS == inputTag) break; // the expression is invalid
+        if (ANS != errorTag) // x belong to the domain
+        {
+            qx[++tot] = i; qy[tot] = ANS;
+        }
+    }
+}</code></pre></div>
+
+<ul>
+<li>\(x\)在\([l, r]\)取600个点，因为在屏幕上只能打印六百个整点。</li>
+<li>为保证将x替换为数值时在负数情形的正确性，在x左右加上括号。</li>
+<li>考虑了表达式不合法以及定义域的问题。</li>
+</ul>
+
+<h3 id="toc_11">调整横纵坐标范围</h3>
+
+<div><pre><code class="language-cpp">//Part I
+int lp = 1, rp = tot;
+while(fabs(qy[lp]) &gt; INF &amp;&amp; lp &lt; rp) lp++;
+while(fabs(qy[rp]) &gt; INF &amp;&amp; lp &lt; rp) rp--;
+
+//Part II
+double mx;
+for(i = lp; i &lt;= rp; i++)
+{
+    if (fabs(qy[i]) &lt; INF) mx = max(mx, fabs(qy[i]));
+}
+
+//Part III
+double EPS = mx / 300.0;
+while(fabs(qy[lp]) &lt; EPS &amp;&amp; lp &lt; rp) lp++;
+while(fabs(qy[rp]) &lt; EPS &amp;&amp; lp &lt; rp) rp--; 
+
+//Part IV
+double max_x = max(fabs(qx[lp]), qx[rp]), max_y = mx;
+max_x = min(max_x, max_y * 10);
+double kx = 300 / max_x, ky = 290 / max_y;</code></pre></div>
+
+<ul>
+<li>第一部分是为了把x趋于无穷时，f也趋于无穷的部分略去。</li>
+<li>第二部分找到剩余部分的极值</li>
+<li>第三部分将x趋于无穷时，f趋于0的部分略去</li>
+<li>第四部分框定横纵坐标的范围。其中x的范围不超过y范围的10倍是为了解决周期函数（如sinx）的问题，略显草率，但效果不错。</li>
+</ul>
+
+<h3 id="toc_12">打印图像</h3>
+
+<div><pre><code class="language-cpp">getData(-max_x, max_x);
+
+//Print the graph with the discrete points
+for(i = 1; i &lt; tot; i++)
+{
+    Point p1, p2;
+    p1.x = (int)(qx[i] * kx); p1.y = (int)(qy[i] * ky);
+    p2.x = (int)(qx[i + 1] * kx); p2.y = (int)(qy[i + 1] * ky);
+    printLine(p1, p2);
+}
+
+//Print the domain and codomain 
+char xm[100], xp[100];
+char ym[100], yp[100];
+sprintf(xp, &quot;%.0lf&quot;, max_x);
+sprintf(yp, &quot;%.0lf&quot;, max_y);
+xm[0] = &#39;-&#39;, xm[1] = &#39;\0&#39;;
+ym[0] = &#39;-&#39;, ym[i] = &#39;\0&#39;;
+strcat(xm, xp); strcat(ym, yp);
+paintText(100, 308, xm);
+paintText(700, 308, xp);
+paintText(365, 10, yp);
+paintText(365, 590, ym);</code></pre></div>
+
+<p>打印函数图像，并在坐标轴上标注定义域与值域的范围</p>
+
+<h2 id="toc_13">下一步的实践</h2>
+
+<ol>
+<li>优化周期函数的图像处理</li>
+<li>优化横纵坐标范围的处理</li>
+<li>进一步丰富FuncCalc库</li>
+<li>把FuncCalc库搬上GitHub（划掉）</li>
+</ol>
+
+
+
+
+</body>
+
+</html>
