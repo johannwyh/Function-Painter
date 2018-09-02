@@ -1,6 +1,6 @@
 # Function-Painter
-A function painter with ACLLIB.
+A function painter with ACLLib.
 
-To run the program, the user ought to prepare a windows system and ACLLIB library ahead of time.
+To run the program, the user ought to prepare a windows system and ACLLib library ahead of time.
 
-To prepare an ACLLIB library, see https://github.com/wengkai/ACLLib
+To prepare an ACLLib library, see https://github.com/wengkai/ACLLib
